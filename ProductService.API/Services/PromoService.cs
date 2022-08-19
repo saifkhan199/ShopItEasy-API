@@ -16,17 +16,34 @@ namespace ProductServices.Services
             _promoRepository = promoRepository;
         }
 
+        public async Task<string> AddPromo(Promo promo)
+        {
+            return await _promoRepository.AddPromo(promo);
+        }
        
-        public async Task<Promo> GetPromoByCodeAsync(string code)
+        public async Task<Promo> GetPromoByIdAsync(int id)
         {
-            return await _promoRepository.GetPromoByCodeAsync(code);
+            return await _promoRepository.GetPromoByIdAsync(id);
         }
 
-        public async Task<Promo> EndPromoAsync(string code, Guid id)
+        public async Task<List<Promo>> GetAllPromos()
         {
-            return await _promoRepository.EndPromoAsync(code, id);
+            return await _promoRepository.GetAllPromos();
+        }
+
+        public async Task<int> DeletePromo(int id)
+        {
+            return await _promoRepository.DeletePromo( id);
 
 
         }
+
+        public async Task<int> EditPromo(Promo promo)
+        {
+            return await _promoRepository.EditPromo(promo);
+
+
+        }
+
     }
 }

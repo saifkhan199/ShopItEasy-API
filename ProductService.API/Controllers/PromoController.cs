@@ -25,14 +25,22 @@ namespace ProductServices.Controllers
 
         }
 
+        [HttpPost("addPromo")]
+        public async Task<string> AddPromo([FromBody] Promo promo)
+        {
+            if (promo != null)
+                return await _promoService.AddPromo(promo);
+            else
+                return "Promo value is null";
+        }
 
-        [HttpGet("{code}")]
-        public async Task<Promo> GetPromoByCodeAsync(string code)
+        [HttpGet("{id}")]
+        public async Task<Promo> GetPromoByIdAsync(int id)
         {
             try
             {
 
-                var response =await _promoService.GetPromoByCodeAsync(code);
+                var response =await _promoService.GetPromoByIdAsync(id);
 
                 if (response == null)
                 {
@@ -47,18 +55,42 @@ namespace ProductServices.Controllers
             }
         }
 
-        [HttpPut("endPromo/{code}/{id}")]
-        public async Task<Promo> endPromo(string code, Guid id)
+        [HttpGet("getAllPromos")]
+        public async Task<List<Promo>> GetAllPromos()
         {
-            if (code== null)
+            try
             {
-                return null;
+
+                var response = await _promoService.GetAllPromos();
+
+                if (response == null)
+                {
+                    return null;
+                }
+                else
+                    return response;
             }
-            else
+            catch (Exception e)
             {
+                throw e;
+            }
+        }
+
+
+        [HttpPut("deletePromo/{id}")]
+        public async Task<int> DeletePromo(int id)
+        {
                
-                return await _promoService.EndPromoAsync(code, id);
-            }
+             return await _promoService.DeletePromo(id);
+         
+        }
+
+        [HttpPut("EditPromo")]
+        public async Task<int> EditPromo(Promo promo)
+        {
+
+            return await _promoService.EditPromo(promo);
+
         }
     }
 }

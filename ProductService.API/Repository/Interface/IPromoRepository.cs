@@ -8,7 +8,11 @@ namespace ProductServices.Repository.Interface
 {
     public interface IPromoRepository
     {
-        Task<Promo> GetPromoByCodeAsync(string code);
-        Task<Promo> EndPromoAsync(string code, Guid id);
+        Task<string> AddPromo(Promo promo);
+        Task<Promo> GetPromoByIdAsync(int id);
+        Task<int> DeletePromo(int id);
+        Task<int> EditPromo(Promo promo);
+
+        Task<List<Promo>> GetAllPromos();
     }
 }

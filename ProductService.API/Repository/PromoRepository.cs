@@ -14,28 +14,63 @@ namespace ProductServices.Repository
         public PromoRepository(ProductContext context) : base(context)
         {
         }
-        public async Task<Promo> GetPromoByCodeAsync(string code)
+
+        public async Task<string> AddPromo(Promo promo)
+        {
+            var promoInDb =await _context.Promos.FirstOrDefaultAsync(p => p.code == promo.code || p.discountPercentage == promo.discountPercentage);
+            if (promoInDb == null)
+            {
+                var response=await AddAsync(promo);
+                if (response!=null)
+                {
+                    return "Promo Added";
+                }
+            }
+            
+                return "Promo Already Exists with same Code or Discount !";
+            
+        }
+        public async Task<Promo> GetPromoByIdAsync(int id)
         {
             
-            var a =await _context.Promos.FirstOrDefaultAsync(x => x.code==code && x.isActive==true);
+            var a =await _context.Promos.FirstOrDefaultAsync(x => x.Id==id);
             return a;
         }
 
-        public async Task<Promo>EndPromoAsync(string code, Guid id)
+        public async Task<List<Promo>> GetAllPromos()
         {
-            if (code == "" )
-            {
-                throw new ArgumentNullException("Promo Code must not be null");
-            }
-            else
-            {
-                var promo = _context.Set<Promo>().FirstOrDefault(a => a.code == code);
+
+            var promos = await GetAll().ToListAsync();
+            return promos;
+        }
+
+        public async Task<int> DeletePromo(int id)
+        {
+           
+                var promo =_context.Set<Promo>().FirstOrDefault(a => a.Id == id);
                 promo.isActive = false;
                
-                await _context.SaveChangesAsync();
+                return await _context.SaveChangesAsync();
 
-                return promo;
+                
+            
+        }
+
+        public async Task<int> EditPromo(Promo promo)
+        {
+
+            var promoInDb =await _context.Promos.FirstOrDefaultAsync(p => p.Id == promo.Id);
+            if (promoInDb!=null)
+            {
+                promoInDb.code = promo.code;
+                promoInDb.discountPercentage = promo.discountPercentage;
+                promoInDb.isActive = promo.isActive;
             }
+           
+
+            return await _context.SaveChangesAsync();
+
+
         }
     }
 
