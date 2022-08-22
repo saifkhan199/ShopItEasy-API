@@ -49,7 +49,9 @@ namespace ProductServices.Repository
                             Order_Date = orders.Order_Date,
                             gtotal = orders.Amount,
                             orderStatus = orders.orderStatus,
-
+                            promoCode=orders.Promocode,
+                            discountPercentage=orders.discountPercentage,
+                            discountedBill=orders.discountedBill,
                         };
 
 
@@ -86,7 +88,10 @@ namespace ProductServices.Repository
                                    orderStatus = orders.orderStatus,
                                    firstName=orders.firstName,
                                    lastName=orders.lastName,
-                                   email=orders.email
+                                   email=orders.email,
+                                   promoCode = orders.Promocode,
+                                   discountPercentage = orders.discountPercentage,
+                                  
 
                                };
 

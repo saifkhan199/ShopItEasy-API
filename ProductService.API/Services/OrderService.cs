@@ -10,17 +10,19 @@ using System.Threading.Tasks;
 
 namespace ProductServices.Services
 {
-    public class OrderService:IOrderService
+    public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IProductService _productService;
         private readonly IPurchasedItemsRepository _purchasedItemRepository;
-        
-        public OrderService(IOrderRepository orderRepository, IPurchasedItemsRepository purchasedItemRepository, IProductService productService)
+        private readonly IPromoService _promoService;
+
+        public OrderService(IOrderRepository orderRepository, IPurchasedItemsRepository purchasedItemRepository, IPromoService promoService, IProductService productService)
         {
             _orderRepository = orderRepository;
-            _purchasedItemRepository= purchasedItemRepository;
+            _purchasedItemRepository = purchasedItemRepository;
             _productService = productService;
+            _promoService = promoService;
         }
 
         public async Task<AddOrderVM> AddOrderAsync(AddOrderVM orderDetails)
@@ -66,22 +68,34 @@ namespace ProductServices.Services
                     {
                         var Secondresult = await _purchasedItemRepository.AddAsync(purchasedItem);
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         throw e;
                     }
-                    
+
                 }
                 orderDetails.OrderId = OrderID;
                 _productService.UpdateInventory(orderDetails);
 
+                User_Promo userPromo = new User_Promo();
+                userPromo.Id = Guid.NewGuid();
+                userPromo.UserID = orderDetails.UserID;
+                userPromo.OrderId = OrderID;
+                userPromo.PromoCode = orderDetails.promocode;
+
+                if (userPromo.PromoCode != "none")
+                {
+                    _promoService.UpdateUserPromo(userPromo);
+                }
+                
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw;
             }
-            
-            
+
+
 
             return orderDetails;
         }
@@ -99,20 +113,20 @@ namespace ProductServices.Services
         {
             try
             {
-                var result =await _orderRepository.UpdateOrderStatus(orders);
+                var result = await _orderRepository.UpdateOrderStatus(orders);
                 return result;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw;
             }
 
         }
-       
+
 
         public List<GetOrdersVM> GetCustomerOrdersAsync()
         {
-            return  _orderRepository.GetCustomerOrdersAsync();
+            return _orderRepository.GetCustomerOrdersAsync();
         }
     }
 }

@@ -29,6 +29,7 @@ namespace ProductServices.Model {
         public DbSet<PurchasedItems> PurchasedItems { get; set; }
 
         public DbSet<Promo> Promos { get; set; }
+        public DbSet<User_Promo> user_promo { get; set; }
         public DbSet<OrderStatus> orderStatus { get; set; }
 
     }

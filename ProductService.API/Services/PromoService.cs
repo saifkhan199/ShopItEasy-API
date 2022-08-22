@@ -1,4 +1,5 @@
-﻿using ProductServices.Model;
+﻿using ProductService.API.Model;
+using ProductServices.Model;
 using ProductServices.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -45,5 +46,14 @@ namespace ProductServices.Services
 
         }
 
+        public async Task<MessageResponse<User_Promo>> CheckPromo(string code, Guid userId)
+        {
+            return await _promoRepository.CheckPromo(code, userId);
+        }
+
+        public async Task<int> UpdateUserPromo(User_Promo userPromo)
+        {
+            return await _promoRepository.UpdateUserPromo(userPromo);
+        }
     }
 }

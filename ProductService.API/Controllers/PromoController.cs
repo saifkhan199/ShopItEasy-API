@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using ProductService.API.Model;
 using ProductServices.Model;
 using ProductServices.Services;
 using System;
@@ -91,6 +92,20 @@ namespace ProductServices.Controllers
 
             return await _promoService.EditPromo(promo);
 
+        }
+
+        [HttpGet("checkPromo/{code}/{userId}")]
+
+        public async Task<MessageResponse<User_Promo>> CheckPromo(string code, Guid userId)
+        {
+            return await _promoService.CheckPromo(code, userId);
+        }
+
+        [HttpPost("UpdateUserPromo")]
+
+        public async Task<int> UpdateUserPromo(User_Promo userPromo)
+        {
+            return await _promoService.UpdateUserPromo(userPromo);
         }
     }
 }

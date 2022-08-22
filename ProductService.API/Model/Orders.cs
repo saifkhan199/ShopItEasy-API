@@ -36,7 +36,7 @@ namespace ProductServices.Model
 
         public int postalCode { get; set; }
 
-        public int? discountPercentage { get; set; }
+        public string discountPercentage { get; set; }
 
         public int? discountedBill { get; set; }
         public string orderStatus { get; set; }

@@ -1,4 +1,5 @@
-﻿using ProductServices.Model;
+﻿using ProductService.API.Model;
+using ProductServices.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace ProductServices.Repository.Interface
         Task<int> DeletePromo(int id);
         Task<int> EditPromo(Promo promo);
 
+        Task<MessageResponse<User_Promo>> CheckPromo(string code, Guid userId);
+        Task<int> UpdateUserPromo(User_Promo userPromo);
         Task<List<Promo>> GetAllPromos();
     }
 }
