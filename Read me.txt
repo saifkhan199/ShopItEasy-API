@@ -1,0 +1,33 @@
+1) create a blank solution in vs
+2) create 3 web API projects
+3) in API install entity framework core, ef core tools,ef core sql, swashbuckle asp.net core
+4) configure swagger from startup and launch settings
+5) allow CORS from startup
+6) resolve dependencies
+7) install node modules
+8) install bootstrap npm install --save @ng-bootstrap/ng-bootstrap --legacy-peer-deps
+9) install npm install @popperjs/core
+10)install npm install @angular/localize --save --legacy-peer-deps
+11) app paswords is used to send emails
+12) install asp.net authentication jwt bearer
+
+To do:
+1) Mention user name in email rest and signup mail
+2) HashLocationStrategy, LocationStrategy used in app module to resolve refresh issue
+3) Customer details page with no of orders
+4) header after logout
+5) show items in cart
+6) pagination
+7) color option
+8) order status enum
+9) ladies sub category
+10) multiple images
+11) Show orderId on orders 
+12) product Image carousal
+16) DataRepository k addAsync ki return type
+17) signup counter running fast on second time
+
+imp:
+color option
+
+
