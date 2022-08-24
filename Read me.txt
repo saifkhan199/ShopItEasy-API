@@ -8,8 +8,9 @@
 8) install bootstrap npm install --save @ng-bootstrap/ng-bootstrap --legacy-peer-deps
 9) install npm install @popperjs/core
 10)install npm install @angular/localize --save --legacy-peer-deps
-11) app paswords is used to send emails
-12) install asp.net authentication jwt bearer
+11)install image zoom library npm i ngx-image-zoom
+12)app paswords is used to send emails
+13)install asp.net authentication jwt bearer
 
 To do:
 1) Mention user name in email rest and signup mail
@@ -26,6 +27,7 @@ To do:
 12) product Image carousal
 16) DataRepository k addAsync ki return type
 17) signup counter running fast on second time
+13) product image zoom
 
 imp:
 color option
